@@ -1,0 +1,7 @@
+*.gb
+*.gbc
+*.lnk
+*.o
+tools
+bin
+obj

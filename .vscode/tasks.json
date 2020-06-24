@@ -1,0 +1,54 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "make", // Requires make to be installed
+            "presentation": 
+            {
+                "reveal": "silent",
+                "panel":"shared"
+            },
+            "problemMatcher": 
+            [
+                {
+                    "fileLocation": ["relative", "${workspaceFolder}\\src"],
+                    "pattern":
+                    {
+                        "regexp": "error: ((\\w+ )+)\\'(\\w+\\.\\w+)\\'",
+                        "file": 3,
+                        "message": 1
+                    }
+                },
+                {
+                    "fileLocation": ["relative", "${workspaceFolder}\\src"],
+                    "pattern":
+                    {
+                        "regexp": "error: ((\\w+)\\.(\\w+))(\\:\\:.+)*\\((\\d+)\\) : (.+)",
+                        "file": 1,
+                        "location": 5,
+                        "message": 6
+                    }
+                },
+                {
+                    "fileLocation": ["relative", "${workspaceFolder}\\src"],
+                    "pattern":
+                    [
+                        {
+                            "regexp": "ERROR:( \\w+.\\w+\\(\\d+\\)( ->)*)+ (\\w+\\.\\w+)\\((\\d+)\\):",
+                            "file": 3,
+                            "location": 4
+                        },
+                        {
+                            "regexp": "\\s+((\\w+ )+\\w+)",
+                            "message": 1
+                        }
+                    ]
+                },
+            ]
+        }
+    ]
+}

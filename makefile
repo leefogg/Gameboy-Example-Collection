@@ -1,4 +1,4 @@
-romname = ZoomScroller
+romname = ProgressBar
 srcdir = src
 objdir = obj
 outdir = bin

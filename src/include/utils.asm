@@ -129,3 +129,17 @@ MEMCOPY::
 	CP 0
 	JR NZ, MEMCOPY
 	RET
+
+; A - Fill value
+; C - Length
+; HL - Destination
+MEM_FILL:
+	LD [HL+], A
+	DEC C
+	JR NZ, MEM_FILL
+	RET
+
+EnableSprites:
+	LD HL, rLCDC
+	SET 1, [HL]
+	RET

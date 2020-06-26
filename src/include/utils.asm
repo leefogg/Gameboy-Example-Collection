@@ -118,8 +118,7 @@ DMA_LARGE::
 ; BC - Size
 MEMCOPY::
 	LD A, [DE]
-	LD [HL], A
-	INC HL
+	LD [HL+], A
 	INC DE
 	DEC BC
 	LD A, B

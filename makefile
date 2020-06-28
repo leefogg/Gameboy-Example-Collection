@@ -1,18 +1,39 @@
-romname = ProgressBar
 srcdir = src
+resdir = res
 objdir = obj
 outdir = bin
-extension = gbc
 defs=DEBUG
 
-run: $(romname).$(extension)
 
-$(romname).$(extension): $(romname).o
-	rgblink -o $(outdir)/$(romname).$(extension) -n $(outdir)/$(romname).sym $(objdir)/$(romname).o
-	rgbfix -v -C -p 0 -t "$(romname)" $(outdir)/$(romname).$(extension)
+all: resources roms	
 
-$(romname).o: outdir objdir
-	rgbasm -D $(defs) -o $(objdir)/$(romname).o -i $(srcdir)/ $(srcdir)/$(romname).asm
+resources: $(resdir)/Gameboy.pal \
+	$(resdir)/Gameboy.2bbp \
+	$(resdir)/Gameboy.tilemap \
+	$(resdir)/ZoomScroller.2bbp \
+	$(resdir)/ZoomScroller.tilemap \
+	$(resdir)/font.2bbp
+
+roms: $(outdir)/ScanlineLength.gbc \
+	$(outdir)/Demotronic.gbc \
+	$(outdir)/ProgressBar.gbc \
+	$(outdir)/RGBGFX.gbc \
+	$(outdir)/RepeatTiles.gbc \
+	$(outdir)/ZoomScroller.gbc
+
+$(resdir)/%.tilemap:
+	rgbgfx -T -u $(subst .tilemap,.png,$@)
+$(resdir)/%.2bbp:
+	rgbgfx -u -o $@ $(subst .2bbp,.png,$@)
+$(resdir)/%.pal:
+	rgbgfx -P $(subst .pal,.png,$@)
+
+$(outdir)/%.gbc: $(objdir)/%.o outdir
+	rgblink -o $@ -n $(outdir)/$*.sym $<
+	rgbfix -v -C -p 0 -t "$*" $@
+
+$(objdir)/%.o: objdir
+	rgbasm -D $(defs) -o $@ -i $(srcdir)/ $(srcdir)/$*.asm 
 
 outdir:
 ifeq ($(OS), Windows_NT)
@@ -32,7 +53,13 @@ clean:
 ifeq ($(OS), Windows_NT)
 	if exist $(outdir) del /F /Q $(outdir)\*.*
 	if exist $(objdir) del /F /Q $(objdir)\*.*
+	if exist $(objdir) del /F /Q $(resdir)\*.tilemap
+	if exist $(objdir) del /F /Q $(resdir)\*.pal
+	if exist $(objdir) del /F /Q $(resdir)\*.2bbp
 else
 	rm -r -f $(outdir)/*
 	rm -r -f $(objdir)/*
+	rm -r -f $(resdir)/*.pal
+	rm -r -f $(resdir)/*.2bbp
+	rm -r -f $(resdir)/*.tilemap
 endif

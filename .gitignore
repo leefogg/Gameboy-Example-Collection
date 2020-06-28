@@ -5,3 +5,6 @@
 tools
 bin
 obj
+*.pal
+*.tilemap
+*.2bbp

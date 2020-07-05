@@ -19,7 +19,7 @@ roms: $(outdir)/ScanlineLength.gbc \
 	$(outdir)/ProgressBar.gbc \
 	$(outdir)/RGBGFX.gbc \
 	$(outdir)/RepeatTiles.gbc \
-	$(outdir)/ZoomScroller.gbc
+	$(outdir)/ZoomingGrid.gbc
 
 $(resdir)/%.tilemap:
 	rgbgfx -T -u $(subst .tilemap,.png,$@)

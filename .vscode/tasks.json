@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make resources; make bin/ZoomScroller.gbc", // Requires make to be installed
+            "command": "make resources; make bin/ZoomingGrid.gbc", // Requires make to be installed
             "presentation": 
             {
                 "reveal": "silent",

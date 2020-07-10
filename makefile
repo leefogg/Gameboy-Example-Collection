@@ -7,11 +7,11 @@ defs=DEBUG
 
 all: resources roms	
 
-resources: $(resdir)/Gameboy.pal \
-	$(resdir)/Gameboy.2bbp \
-	$(resdir)/Gameboy.tilemap \
-	$(resdir)/ZoomScroller.2bbp \
-	$(resdir)/ZoomScroller.tilemap \
+resources: $(resdir)/gameboy.pal \
+	$(resdir)/gameboy.2bbp \
+	$(resdir)/gameboy.tilemap \
+	$(resdir)/zoomscroller.2bbp \
+	$(resdir)/zoomscroller.tilemap \
 	$(resdir)/font.2bbp
 
 roms: effectRoms exampleRoms testRoms

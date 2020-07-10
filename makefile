@@ -14,12 +14,16 @@ resources: $(resdir)/Gameboy.pal \
 	$(resdir)/ZoomScroller.tilemap \
 	$(resdir)/font.2bbp
 
-roms: $(outdir)/ScanlineLength.gbc \
-	$(outdir)/Demotronic.gbc \
-	$(outdir)/ProgressBar.gbc \
-	$(outdir)/RGBGFX.gbc \
-	$(outdir)/RepeatTiles.gbc \
-	$(outdir)/ZoomingGrid.gbc
+roms: effectRoms exampleRoms testRoms
+
+effectRoms: $(outdir)/effects/Demotronic.gbc \
+	$(outdir)/effects/ProgressBar.gbc \
+	$(outdir)/effects/RepeatTiles.gbc \
+	$(outdir)/effects/ZoomingGrid.gbc
+
+exampleRoms: $(outdir)/examples/RGBGFX.gbc
+
+testRoms: $(outdir)/tests/ScanlineLength.gbc
 
 $(resdir)/%.tilemap:
 	rgbgfx -T -u $(subst .tilemap,.png,$@)
@@ -29,11 +33,11 @@ $(resdir)/%.pal:
 	rgbgfx -P $(subst .pal,.png,$@)
 
 $(outdir)/%.gbc: $(objdir)/%.o outdir
-	rgblink -o $@ -n $(outdir)/$*.sym $<
-	rgbfix -v -C -p 0 -t "$*" $@
+	rgblink -o $(outdir)/$(notdir $@) -n $(outdir)/$(notdir $*).sym $(objdir)/$(notdir $<)
+	rgbfix -v -C -p 0 -t "$(notdir $*)" $(outdir)/$(notdir $@)
 
 $(objdir)/%.o: objdir
-	rgbasm -D $(defs) -o $@ -i $(srcdir)/ $(srcdir)/$*.asm 
+	rgbasm -D $(defs) -o $(objdir)/$(notdir $@) -i $(srcdir)/ $(srcdir)/$*.asm 
 
 outdir:
 ifeq ($(OS), Windows_NT)

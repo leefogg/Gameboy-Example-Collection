@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:18.04
 ARG env=DEBUG
 ARG DEBIAN_FRONTEND=noninteractive
 

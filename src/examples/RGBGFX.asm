@@ -63,12 +63,12 @@ CopyMap:
     RET
 
 CopyPalette:
-    LD C, rBCPS
+    LD C, LOW(rBCPS)
     LD A, %10000000
     LD [$FF00+C], A
     
     LD HL, PaletteData
-    LD C, rBCPD
+    LD C, LOW(rBCPD)
     REPT 8
         LD A, [HL+]
         LD [$FF00+C], A

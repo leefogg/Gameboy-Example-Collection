@@ -20,5 +20,3 @@
 * https://youtu.be/di_MnKNDfm0?list=PLwCu-LN7gA0lHkdf1ewEsykKrt4XV1CPO&t=88
 
 ## General
-* Get Makefile to find .asm files to build instead of specifying them all
-* Seperate Demos and Examples into seperate folders

@@ -6,9 +6,9 @@ This repository contains 3 collections, each with a different purpose:
 - Examples to demonstrate Gameboy features
 - Effects to show what can be achieved
 
+![Demotronic](/docs/res/demotronic.gif)
 ![Zoom Scroller](/docs/res/zoomscroller.gif)
 ![Progress bar](/docs/res/progressbar.gif)
-![Demotronic](/docs/res/demotronic.gif)
 
 ## How to build
 - Run `make` in the root directory
@@ -17,5 +17,6 @@ This repository contains 3 collections, each with a different purpose:
 ### Requires
 - [RGBDS](https://github.com/rednex/rgbds) to be installed globally
 - `Make` to be installed globally
+- (Optionally) [Docker](https://www.docker.com) instead of the above
 
 Feel free to use this as a base 'sandbox' to write small MVC programs and possibly merge them in.

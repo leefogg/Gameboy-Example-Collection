@@ -16,14 +16,11 @@ resources: $(resdir)/gameboy.pal \
 
 roms: effectRoms exampleRoms testRoms
 
-effectRoms: $(outdir)/effects/Demotronic.gbc \
-	$(outdir)/effects/ProgressBar.gbc \
-	$(outdir)/effects/RepeatTiles.gbc \
-	$(outdir)/effects/ZoomingGrid.gbc
+effectRoms: $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/effects/*.asm))
 
-exampleRoms: $(outdir)/examples/RGBGFX.gbc
+exampleRoms: $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/examples/*.asm))
 
-testRoms: $(outdir)/tests/ScanlineLength.gbc
+testRoms: $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/tests/*.asm))
 
 $(resdir)/%.tilemap:
 	rgbgfx -T -u $(subst .tilemap,.png,$@)

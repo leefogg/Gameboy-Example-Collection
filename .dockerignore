@@ -1,5 +1,5 @@
-*.2bbp
-*.tilemap
-*.pal
+res/*.2bbp
+res/*.tilemap
+res/*.pal
 bin
 obj

@@ -7,20 +7,15 @@ defs=DEBUG
 
 all: resources roms	
 
-resources: $(resdir)/gameboy.pal \
-	$(resdir)/gameboy.2bbp \
-	$(resdir)/gameboy.tilemap \
-	$(resdir)/zoomscroller.2bbp \
-	$(resdir)/zoomscroller.tilemap \
-	$(resdir)/font.2bbp
+resources: palettes tilesets tilemaps
+palettes: $(subst .png,.pal,$(wildcard $(resdir)/*.png))
+tilesets: $(subst .png,.2bbp,$(wildcard $(resdir)/*.png))
+tilemaps: $(subst .png,.tilemap,$(wildcard $(resdir)/*.png))
 
 roms: effectRoms exampleRoms testRoms
-
-effectRoms: $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/effects/*.asm))
-
+effectRoms:  $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/effects/*.asm))
 exampleRoms: $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/examples/*.asm))
-
-testRoms: $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/tests/*.asm))
+testRoms: 	 $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/tests/*.asm))
 
 $(resdir)/%.tilemap:
 	rgbgfx -T -u $(subst .tilemap,.png,$@)

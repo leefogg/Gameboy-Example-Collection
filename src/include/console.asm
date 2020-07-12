@@ -40,47 +40,72 @@ Console_WriteChar::
     CALL SaveCursorPosition
     RET
 
-GetCursorPosition:
-    LD HL, CursorY
-    LD A, [HL+]
-    RLA 
-    RLA 
-    RLA 
-    RLA 
-    RLA
-    LD C, A
-    LD A, [HL]
-    OR C
+; BC - String src
+Console_WriteString::
+    CALL GetCursorPosition
+.Loop:
+    LD A, [BC]
+    OR A
+    JR Z, .Break
+    INC BC
+    SUB A, $20
+    LD [HL+], A
+    JR .Loop
+.Break:
+    CALL SaveCursorPosition
+    RET
 
-    LD L, A
-    LD H, 0
+Console_Newline:
+    LD HL, CursorY
+    INC [HL]
+    INC HL
+    XOR A
+    LD [HL], A
+    RET
+
+GetCursorPosition:
     PUSH BC
+        LD HL, CursorY
+        LD A, [HL+]
+        RLA 
+        RLA 
+        RLA 
+        RLA 
+        RLA
+        LD C, A
+        LD A, [HL]
+        OR C
+
+        LD L, A
+        LD H, 0
         LD BC, _SCRN0
         ADD HL, BC
     POP BC
-
     RET
 
 SaveCursorPosition:
-    LD BC, 0 - _SCRN0
-    ADD HL, BC
+    PUSH BC
+        LD BC, 0 - _SCRN0
+        ADD HL, BC
 
-    LD A, L
-    AND A, 31
-    LD B, A
+        LD A, L
+        AND A, 31
+        LD B, A
 
-    SLA H
-    SLA L
-    SLA H
-    SLA L
-    LD A, H
-    AND A, 31
+        RL L
+        RL H
+        RL L
+        RL H
+        RL L
+        RL H
+        LD A, H
+        AND A, 31
 
-    LD HL, CursorY
-    LD [HL+], A
-    LD A, B
-    LD [HL], A
-
+        LD HL, CursorY
+        LD [HL+], A
+        LD A, B
+        LD [HL], A
+    POP BC
     RET
 
 

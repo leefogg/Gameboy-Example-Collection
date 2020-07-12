@@ -2,7 +2,6 @@ srcdir = src
 resdir = res
 objdir = obj
 outdir = bin
-defs=DEBUG
 
 
 all: resources roms	
@@ -25,11 +24,11 @@ $(resdir)/%.pal:
 	rgbgfx -P $(subst .pal,.png,$@)
 
 $(outdir)/%.gbc: $(objdir)/%.o outdir
-	rgblink -o $(outdir)/$(notdir $@) -n $(outdir)/$(notdir $*).sym $(objdir)/$(notdir $<)
-	rgbfix -v -C -p 0 -t "$(notdir $*)" $(outdir)/$(notdir $@)
+	rgblink --sym $(outdir)/$(notdir $*).sym --output $(outdir)/$(notdir $@) $(objdir)/$(notdir $<)
+	rgbfix --validate --non-japanese --color-only --mbc-type 0x1A --ram-size 0x05 --title "$(notdir $*)" $(outdir)/$(notdir $@)
 
 $(objdir)/%.o: objdir
-	rgbasm -D $(defs) -o $(objdir)/$(notdir $@) -i $(srcdir)/ $(srcdir)/$*.asm 
+	rgbasm --output $(objdir)/$(notdir $@) --export-all --include $(srcdir)/ $(srcdir)/$*.asm 
 
 outdir:
 ifeq ($(OS), Windows_NT)

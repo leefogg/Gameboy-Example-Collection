@@ -143,3 +143,15 @@ EnableSprites:
 	LD HL, rLCDC
 	SET 1, [HL]
 	RET
+
+DisableSprites:
+	LD HL, rLCDC
+	RES 1, [HL]
+	RET
+
+ToggleSpritesEnabled:
+	LD C, LOW(rLCDC)
+	LD A, [$FF00+C]
+	XOR %0000010
+	LD [$FF00+C], A
+	RET

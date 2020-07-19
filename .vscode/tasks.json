@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make resources; make bin/tests/RAMBanks.gbc", // Requires make to be installed
+            "command": "make resources; make bin/effects/Blending.gbc", // Requires make to be installed
             "presentation": 
             {
                 "reveal": "silent",

@@ -1,12 +1,4 @@
 ## Examples
-* Testing all 8 RAM banks
-    * Store 8 strings in each bank then load them onto the screen
-    * e.g "Loaded from RAM bank 6"
-    * e.g "Loaded from RAM bank 7"
-
-* Test all ROM banks
-    * Display Same as RAM test
-
 * Test external RAM (save game)
     * Read and display string from RAM otherwise save it to RAM
 

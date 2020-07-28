@@ -77,7 +77,7 @@ CopyPalette:
 
 SECTION "Data", ROM0
 TileData:
-INCBIN "res/gameboy.2bbp"
+INCBIN "res/gameboy.2bpp"
 TileData_End:
 MapData:
 INCBIN "res/gameboy.tilemap"

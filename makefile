@@ -8,7 +8,7 @@ all: resources roms
 
 resources: palettes tilesets tilemaps
 palettes: $(subst .png,.pal,$(wildcard $(resdir)/*.png))
-tilesets: $(subst .png,.2bbp,$(wildcard $(resdir)/*.png))
+tilesets: $(subst .png,.2bpp,$(wildcard $(resdir)/*.png))
 tilemaps: $(subst .png,.tilemap,$(wildcard $(resdir)/*.png))
 
 roms: effectRoms exampleRoms testRoms
@@ -18,8 +18,8 @@ testRoms: 	 $(patsubst $(srcdir)/%.asm, $(outdir)/%.gbc, $(wildcard $(srcdir)/te
 
 $(resdir)/%.tilemap:
 	rgbgfx -T -u $(subst .tilemap,.png,$@)
-$(resdir)/%.2bbp:
-	rgbgfx -u -o $@ $(subst .2bbp,.png,$@)
+$(resdir)/%.2bpp:
+	rgbgfx -u -o $@ $(subst .2bpp,.png,$@)
 $(resdir)/%.pal:
 	rgbgfx -P $(subst .pal,.png,$@)
 
@@ -50,11 +50,11 @@ ifeq ($(OS), Windows_NT)
 	if exist $(objdir) del /F /Q $(objdir)\*.*
 	if exist $(objdir) del /F /Q $(resdir)\*.tilemap
 	if exist $(objdir) del /F /Q $(resdir)\*.pal
-	if exist $(objdir) del /F /Q $(resdir)\*.2bbp
+	if exist $(objdir) del /F /Q $(resdir)\*.2bpp
 else
 	rm -r -f $(outdir)/*
 	rm -r -f $(objdir)/*
 	rm -r -f $(resdir)/*.pal
-	rm -r -f $(resdir)/*.2bbp
+	rm -r -f $(resdir)/*.2bpp
 	rm -r -f $(resdir)/*.tilemap
 endif

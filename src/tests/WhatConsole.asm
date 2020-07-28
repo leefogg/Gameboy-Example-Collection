@@ -46,7 +46,7 @@ DetermineConsole:
 
 SECTION "FONT", ROM0[$1000]
 FontStart:
-    INCBIN "res/font.2bbp"
+    INCBIN "res/font.2bpp"
 FontEnd:
 
 SECTION "Console Names", ROM0

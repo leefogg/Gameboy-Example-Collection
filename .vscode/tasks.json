@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make resources; make bin/tests/WhatConsole.gbc", // Requires make to be installed
+            "command": "make resources; make bin/tests/Grey2grey.gbc", // Requires make to be installed
             "presentation": 
             {
                 "reveal": "silent",

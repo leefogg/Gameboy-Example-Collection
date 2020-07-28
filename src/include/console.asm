@@ -9,8 +9,8 @@ Console_Init::
 Console_LoadFont::
     LD DE, FontStart
     LD HL, _VRAM
-    LD C, (FontEnd - FontStart) / 16
-    STARTDMA
+    LD BC, FontEnd - FontStart
+    CALL MEMCOPY
 
     ; Set palette
     LD C, LOW(rBCPS)
@@ -33,36 +33,65 @@ Console_LoadFont::
 
 ; B - Char
 Console_WriteChar::
-    CALL GetCursorPosition
-    LD A, B
-    SUB A, $20
-    LD [HL+], A
-    CALL SaveCursorPosition
+    PUSH HL
+        CALL GetCursorPosition
+
+        LD A, B
+        SUB A, $20
+        LD [HL+], A
+
+        CALL SaveCursorPosition
+    POP HL
+    RET
+
+; B - Value
+Console_WriteRegister::
+    PUSH HL
+        CALL GetCursorPosition
+
+        LD A, B
+        SWAP A
+        AND $0F
+        CALL _GetNibbleChar
+        LD [HL+], A
+        LD A, B
+        AND $0F
+        CALL _GetNibbleChar
+        LD [HL+], A
+
+        CALL SaveCursorPosition
+    POP HL
     RET
 
 ; BC - String src
 Console_WriteString::
-    CALL GetCursorPosition
+    PUSH HL
+        CALL GetCursorPosition
 .Loop:
-    LD A, [BC]
-    OR A
-    JR Z, .Break
-    INC BC
-    SUB A, $20
-    LD [HL+], A
-    JR .Loop
+        LD A, [BC]
+        OR A
+        JR Z, .Break
+        INC BC
+        SUB A, $20
+        LD [HL+], A
+        JR .Loop
 .Break:
-    CALL SaveCursorPosition
+        CALL SaveCursorPosition
+    POP HL
     RET
 
-Console_Newline:
-    LD HL, CursorY
-    INC [HL]
-    INC HL
-    XOR A
-    LD [HL], A
+Console_Newline::
+    PUSH HL
+        LD HL, CursorY
+        INC [HL]
+        INC HL
+        XOR A
+        LD [HL], A
+    POP HL
     RET
 
+; Returns:
+; HL - _SCRN0 + Position
 GetCursorPosition:
     PUSH BC
         LD HL, CursorY
@@ -108,6 +137,15 @@ SaveCursorPosition:
     POP BC
     RET
 
+
+_GetNibbleChar:
+    CP 10
+    JR NC, .IsLetter
+    ADD A, 16 ; '0'
+    RET
+.IsLetter:
+    ADD A, 33 - 10 ; 'A'
+    RET
 
 SECTION "Console Variables", WRAM0
 CursorY: ds 1

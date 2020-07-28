@@ -155,3 +155,14 @@ ToggleSpritesEnabled:
 	XOR %0000010
 	LD [$FF00+C], A
 	RET
+
+ClearNintendoLogo:
+	LD A, 0
+	LD C, 13
+	LD HL, _SCRN0 + 260
+	CALL MEM_FILL
+	LD A, 0
+	LD C, 13
+	LD HL, _SCRN0 + 292
+	CALL MEM_FILL
+	RET

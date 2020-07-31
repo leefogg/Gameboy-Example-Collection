@@ -6,11 +6,11 @@ This repository contains 3 collections, each with a different purpose:
 - Examples to demonstrate Gameboy features
 - Effects to show what can be achieved
 
-![Demotronic](/docs/res/Demotronic.gif)
-![Zoom Scroller](/docs/res/zoomingGrid.gif)
+![Demotronic](/docs/res/demotronic.gif)
+![Zoom Scroller](/docs/res/ZoomingGrid.gif)
 ![Progress bar](/docs/res/Blending.gif)
-![Progress bar](/docs/res/ProgressBar.gif)
-![Progress bar](/docs/res/repeatTiles.gif)
+![Progress bar](/docs/res/progressbar.gif)
+![Progress bar](/docs/res/RepeatTiles.gif)
 ![Progress bar](/docs/res/ROMBanks.gif)
 ![Progress bar](/docs/res/RGBGFX.gif)
 

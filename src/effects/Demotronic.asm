@@ -14,9 +14,9 @@ SECTION "Boot Vector", ROM0[$100]
 
 SECTION "Main", ROM0[$150]
 Main:
-    SwitchMode
+    SwitchSpeedMode
 
-    TurnLCDOff
+    CALL LCDOff
 
     CALL SetupPalettes
 
@@ -26,14 +26,9 @@ Main:
 
     CALL EnableVBlank
 
-    ; Turn on LCD
-    LD HL, rLCDC
-	SET 7, [HL]
-
-Sleep:
-    ;JR Sleep
+    CALL LCDOn
     EI
-    HALT
+    JP Sleep
 
 PrepareVariables:
     ; Start at the top so the current RAM value doesn't imact where we start

@@ -9,9 +9,7 @@ SECTION "Boot Vector", ROM0[$100]
 
 SECTION "Main", ROM0[$150]
 Main:
-    ; Turn off LCD
-    LD HL, rLCDC
-	RES 7, [HL]
+    CALL LCDOff
 
     CALL Console_Init
     CALL Console_LoadFont
@@ -37,13 +35,8 @@ Main:
     LD BC, RomBank1
     CALL Console_WriteString
 
-    
-    ; Turn on LCD
-    LD HL, rLCDC
-	SET 7, [HL]
-Sleep:
-    HALT
-    JR Sleep
+    CALL LCDOn
+    JP Sleep
 
 SECTION "Bank 1", ROMX, BANK[1]
 DB "From ROM Bank 1", 0

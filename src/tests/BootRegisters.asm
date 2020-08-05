@@ -13,9 +13,7 @@ Main:
     PUSH DE
     PUSH BC
     PUSH AF
-        ; Turn off LCD
-        LD HL, rLCDC
-        RES 7, [HL]
+        CALL LCDOff
 
         CALL ClearNintendoLogo
         CALL Console_Init
@@ -67,15 +65,11 @@ Main:
 
 
     
-    ; Turn on LCD
-    LD HL, rLCDC
-	SET 7, [HL]
-Sleep:
-    HALT
-    JR Sleep
+    CALL LCDOn
+    JP Sleep
 
 
-SECTION "REGISTER LABELS", ROM0
+SECTION "REGISTER LABELS", ROM0[$2000]
 A_TEXT:
 DB "A: ", 0
 B_TEXT:

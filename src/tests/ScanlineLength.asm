@@ -14,23 +14,17 @@ SECTION "Boot Vector", ROM0[$100]
 
 SECTION "Main", ROM0[$150]
 Main:
-    ; Turn off LCD
-    LD HL, rLCDC
-	RES 7, [HL]
+    CALL LCDOff
 
     CALL EnableHBlank
     CALL EnableVBlank
 
-    ; Turn on LCD
-    LD HL, rLCDC
-	SET 7, [HL]
+    CALL LCDOn
 
     LD HL, _RAM
     LD C, 10
     EI
-Sleep:
-    HALT
-    JR Sleep
+    JP Sleep
 
 HandleHBlank:
     ; This will fire every hblank. The value written into RAM is how long the previous hlank-hblank took in M-Cycles

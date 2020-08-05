@@ -57,6 +57,20 @@ SwitchRomBank:
 	LD [HL], A
 	RET
 
+LCDOff:
+	LD HL, rLCDC
+	RES 7, [HL]
+	RET
+
+LCDOn:
+	LD HL, rLCDC
+	SET 7, [HL]
+	RET
+
+Sleep:
+    HALT
+    JR Sleep
+
 
 ; HL - Destination
 ; DE - Origin

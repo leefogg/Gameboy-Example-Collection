@@ -15,9 +15,7 @@ Main:
     CALL EnableVBlank
     CALL InitializeVariables
     EI
-Sleep:
-    HALT
-    JR Sleep
+    JP Sleep
 
 InitializeVariables:
     LD HL, WhiteOrBlack

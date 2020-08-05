@@ -9,9 +9,7 @@ SECTION "Boot Vector", ROM0[$100]
 
 SECTION "Main", ROM0[$150]
 Main:
-    ; Turn off LCD
-    LD HL, rLCDC
-	RES 7, [HL]
+    CALL LCDOff
 
     CALL DetermineConsole
 
@@ -23,12 +21,8 @@ Main:
 
     CALL Console_WriteString
     
-    ; Turn on LCD
-    LD HL, rLCDC
-	SET 7, [HL]
-Sleep:
-    HALT
-    JR Sleep
+    CALL LCDOn
+    JP Sleep
 
 DetermineConsole:
     BIT 5, A
@@ -44,7 +38,7 @@ DetermineConsole:
     LD BC, GB
     RET
 
-SECTION "Console Names", ROM0
+SECTION "Console Names", ROM0[$2000]
 GB:
 DB "Gameboy", 0
 GBC:

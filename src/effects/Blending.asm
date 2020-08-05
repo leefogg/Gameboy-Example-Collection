@@ -11,9 +11,7 @@ SECTION "Boot Vector", ROM0[$100]
 
 SECTION "Main", ROM0[$150]
 Main:
-    ; Turn off LCD
-    LD HL, rLCDC
-	RES 7, [HL]
+    CALL LCDOff
 
     CALL SetupPalette
     CALL MakeTiles
@@ -23,13 +21,9 @@ Main:
     CALL EnableSprites
     CALL EnableVBlank
 
-    ; Turn on LCD
-    LD HL, rLCDC
-	SET 7, [HL]
+    CALL LCDOn
     EI
-Sleep:
-    HALT
-    JR Sleep
+    JP Sleep
 
 MakeTiles:
     LD DE, IndexedTileData_Start

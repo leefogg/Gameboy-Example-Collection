@@ -24,7 +24,7 @@ STARTDMA: MACRO
 	LDH [LOW(rHDMA5)], A
 ENDM
 
-SwitchMode: MACRO
+SwitchSpeedMode: MACRO
 	LD A, 1
 	LDH [$FF00+LOW(rKEY1)], A
 	STOP
@@ -38,13 +38,6 @@ WaitVBlank: MACRO
 	AND %00000011
 	CP D
 	JR NZ, .Loop
-ENDM
-
-TurnLCDOff: MACRO
-	WaitVBlank
-
-	LD HL, rLCDC
-	RES 7, [HL]
 ENDM
 
 DelayMStates: MACRO

@@ -12,9 +12,7 @@ Main:
     CALL VerifyIDsOfBanks
     ; If a is not 0 here, test failed
     BREAKPOINT
-Sleep:
-    HALT
-    JR Sleep
+    JP Sleep
 
 WriteIDsToBanks:
     LD A, 4

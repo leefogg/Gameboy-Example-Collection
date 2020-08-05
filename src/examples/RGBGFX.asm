@@ -2,12 +2,36 @@ INCLUDE "include/hardware.inc"
 INCLUDE "include/macros.inc"
 INCLUDE "include/utils.asm"
 
+SECTION "Boot Vector", ROM0[$100]
+    JR Main
+
+SECTION "Main", ROM0[$150]
+Main:
+    CALL LCDOff
+
+    CALL CopyPalette
+    CALL CopyTiles
+    CALL CopyMap
+
+    CALL LCDOn
+    JP Sleep
+
+CopyTiles:
+    LD DE, TileData
+    LD HL, _VRAM
+    LD BC, TileData_End - TileData
+    CALL MEMCOPY
+    RET
+
+CopyMap:
+    LD DE, MapData
+    LD C, $FF
+
 ; DE - Origin
 CopyImage::
     LD HL, _SCRN0 - 1
     LD B, 18
     LD C, 20
-
 .Loop
     INC HL
     LD A, [DE]
@@ -28,39 +52,6 @@ CopyImage::
     POP BC
 
     JR .Loop
-
-SECTION "Boot Vector", ROM0[$100]
-    JR Main
-
-SECTION "Main", ROM0[$150]
-Main:
-     ; Turn off LCD
-    LD HL, rLCDC
-	RES 7, [HL]
-
-    CALL CopyPalette
-    CALL CopyTiles
-    CALL CopyMap
-
-    ; Turn on LCD
-    LD HL, rLCDC
-	SET 7, [HL]
-Sleep:
-    HALT
-    JR Sleep
-
-CopyTiles:
-    LD DE, TileData
-    LD HL, _VRAM
-    LD BC, TileData_End - TileData
-    CALL MEMCOPY
-    RET
-
-CopyMap:
-    LD DE, MapData
-    LD C, $FF
-    CALL CopyImage
-    RET
 
 CopyPalette:
     LD C, LOW(rBCPS)

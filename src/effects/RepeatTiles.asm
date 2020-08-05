@@ -11,9 +11,7 @@ SECTION "Boot Vector", ROM0[$100]
 
 SECTION "Main", ROM0[$150]
 Main:
-    ; Turn off LCD
-    LD HL, rLCDC
-	RES 7, [HL]
+    CALL LCDOff
 
     CALL Console_LoadFont
 
@@ -32,13 +30,9 @@ Main:
 
     CALL EnableHBlank
 
-    ; Turn on LCD
-    LD HL, rLCDC
-	SET 7, [HL]
+    CALL LCDOn
     EI
-Sleep:
-    HALT
-    JR Sleep
+    JP Sleep
 
 HandleHBlank:
     LD C, LOW(rSCX)

@@ -19,23 +19,20 @@ Main:
     LD BC, RomBank1
     CALL Console_WriteString
 
-    LD HL, rROMB0
-    LD A, 1
-    LD [HL], A
-    CALL Console_Newline
-    LD BC, RomBank1
-    CALL Console_WriteString
-
-    LD HL, rROMB0
     LD A, 2
-    LD [HL], A
+    CALL SwitchRomBank
     CALL Console_Newline
     LD BC, RomBank1
     CALL Console_WriteString
 
-    LD HL, rROMB0
     LD A, 3
-    LD [HL], A
+    CALL SwitchRomBank
+    CALL Console_Newline
+    LD BC, RomBank1
+    CALL Console_WriteString
+
+    LD A, 4
+    CALL SwitchRomBank
     CALL Console_Newline
     LD BC, RomBank1
     CALL Console_WriteString

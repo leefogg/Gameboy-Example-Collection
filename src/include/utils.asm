@@ -50,6 +50,13 @@ SwitchToBank1:
     LD [rVBK], A
 	RET
 
+; Arguments:
+; A - Bank (1 indexed)
+SwitchRomBank:
+	LD HL, rROMB0
+	LD [HL], A
+	RET
+
 
 ; HL - Destination
 ; DE - Origin

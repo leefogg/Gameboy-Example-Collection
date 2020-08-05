@@ -45,11 +45,6 @@ Sleep:
     HALT
     JR Sleep
 
-SECTION "FONT", ROM0[$1000]
-FontStart:
-    INCBIN "res/font.2bpp"
-FontEnd:
-
 SECTION "Bank 1", ROMX, BANK[1]
 DB "From ROM Bank 1", 0
 SECTION "Bank 2", ROMX, BANK[2]

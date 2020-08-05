@@ -74,10 +74,7 @@ Sleep:
     HALT
     JR Sleep
 
-SECTION "FONT", ROM0[$1000]
-FontStart:
-    INCBIN "res/font.2bpp"
-FontEnd:
+
 SECTION "REGISTER LABELS", ROM0
 A_TEXT:
 DB "A: ", 0

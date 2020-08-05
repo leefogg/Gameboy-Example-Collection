@@ -147,6 +147,11 @@ _GetNibbleChar:
     ADD A, 33 - 10 ; 'A'
     RET
 
+SECTION "FONT", ROM0[$1000]
+FontStart:
+    INCBIN "res/font.2bpp"
+FontEnd:
+
 SECTION "Console Variables", WRAM0
 CursorY: ds 1
 CursorX: ds 1

@@ -44,11 +44,6 @@ DetermineConsole:
     LD BC, GB
     RET
 
-SECTION "FONT", ROM0[$1000]
-FontStart:
-    INCBIN "res/font.2bpp"
-FontEnd:
-
 SECTION "Console Names", ROM0
 GB:
 DB "Gameboy", 0

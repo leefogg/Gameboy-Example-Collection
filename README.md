@@ -8,6 +8,7 @@ This repository contains 3 collections, each with a different purpose:
 
 ![Demotronic](/docs/res/demotronic.gif)
 ![Zoom Scroller](/docs/res/ZoomingGrid.gif)
+![Zoom Scroller](/docs/res/ParallaxScroller.gif)
 ![Progress bar](/docs/res/Blending.gif)
 ![Progress bar](/docs/res/progressbar.gif)
 ![Progress bar](/docs/res/RepeatTiles.gif)

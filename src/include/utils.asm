@@ -187,3 +187,12 @@ ClearNintendoLogo:
 	LD HL, _SCRN0 + 292
 	CALL MEM_FILL
 	RET
+
+SwitchSpeed:
+	DI
+	LD A, $30 
+	LD [$FF00+LOW(rP1)], A
+	LD A, 1
+	LDH [$FF00+LOW(rKEY1)], A
+	STOP 
+	RETI

@@ -25,6 +25,7 @@ Main:
     CALL EnableVBlank
     CALL EnableHBlank
     CALL EnableSprites
+    CALL SwitchSpeed
     CALL LCDOn
     EI
     JP Sleep
@@ -94,6 +95,13 @@ CreatePositions:
     RET
 
 HandleVBlank:
+    LD HL, FrameNumber
+    LD A, [HL]
+    INC A
+    LD [HL], A
+    BIT 0, A
+    JP NZ, .return
+
     LD L, 0
     LD B, HIGH(RandomSpeeds)
     LD C, HIGH(XPositions)
@@ -107,12 +115,13 @@ HandleVBlank:
         INC L
     ENDR
 
+.return:
     LD L, 0
     LD B, 16 ; Sprite height + 1 for next scanline
     LD C, LOW(rLY)
 
-
     RETI
+
 HandleHBlank:
 
     LD DE, _OAMRAM
@@ -154,4 +163,5 @@ DB 0, 0, 0, 0
 
 
 SECTION "Variables", WRAM0
+FrameNumber: ds 1
 XPositions: ds 144

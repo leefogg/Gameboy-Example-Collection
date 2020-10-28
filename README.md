@@ -6,14 +6,18 @@ This repository contains 3 collections, each with a different purpose:
 - Examples to demonstrate Gameboy features
 - Effects to show what can be achieved
 
-![Demotronic](/docs/res/demotronic.gif)
+![Demotronic](/docs/res/Demotronic.gif)
+![Interlacing](/docs/res/Interlace.gif)
 ![Zoom Scroller](/docs/res/ZoomingGrid.gif)
-![Zoom Scroller](/docs/res/ParallaxScroller.gif)
-![Progress bar](/docs/res/Blending.gif)
-![Progress bar](/docs/res/progressbar.gif)
-![Progress bar](/docs/res/RepeatTiles.gif)
-![Progress bar](/docs/res/ROMBanks.gif)
-![Progress bar](/docs/res/RGBGFX.gif)
+![Stars](/docs/res/Stars.gif)
+![Parallax Scroller](/docs/res/ParallaxScroller.gif)
+![Blending](/docs/res/Blending.gif)
+![Priority](/docs/res/Priority.gif)
+![Progress bar](/docs/res/Progressbar.gif)
+![Repeating Tiles](/docs/res/RepeatTiles.gif)
+![ROM Banks](/docs/res/ROMBanks.gif)
+![RGBFX](/docs/res/RGBGFX.gif)
+
 
 ## How to build
 - Run `make` in the root directory

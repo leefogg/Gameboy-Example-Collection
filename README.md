@@ -13,7 +13,7 @@ This repository contains 3 collections, each with a different purpose:
 ![Parallax Scroller](/docs/res/ParallaxScroller.gif)
 ![Blending](/docs/res/Blending.gif)
 ![Priority](/docs/res/Priority.gif)
-![Progress bar](/docs/res/Progressbar.gif)
+![Progress bar](/docs/res/ProgressBar.gif)
 ![Repeating Tiles](/docs/res/RepeatTiles.gif)
 ![ROM Banks](/docs/res/ROMBanks.gif)
 ![RGBFX](/docs/res/RGBGFX.gif)

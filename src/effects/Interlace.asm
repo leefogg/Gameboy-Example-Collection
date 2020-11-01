@@ -7,7 +7,8 @@ HandleVBlank:
     JP VBlank
 
 SECTION "HBLANK INTERRUPT", ROM0[$48]
-    JP HandleHBlank
+HandleHBlank:
+    JP HBlank
 
 SECTION "Boot Vector", ROM0[$100]
     JR Main
@@ -38,7 +39,8 @@ CopyTiles:
 
 CopyMap:
     LD DE, MapData
-    LD C, $FF
+    CALL CopyImage
+    RET
 
 ; DE - Origin
 CopyImage::
@@ -96,7 +98,7 @@ VBlank:
     LD H, D
     RETI
 
-HandleHBlank:
+HBlank:
     BIT 0, E
     JR Z, .odd
     JR .even

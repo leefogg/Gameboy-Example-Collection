@@ -28,7 +28,7 @@ $(outdir)/%.gbc: $(objdir)/%.o outdir
 	rgbfix --validate --non-japanese --color-only --mbc-type 0x1A --ram-size 0x05 --title "$(notdir $*)" $(outdir)/$(notdir $@)
 
 $(objdir)/%.o: objdir
-	rgbasm --output $(objdir)/$(notdir $@) --export-all --include $(srcdir)/ $(srcdir)/$*.asm 
+	rgbasm --output $(objdir)/$(notdir $@) -l -H --export-all --include $(srcdir)/ $(srcdir)/$*.asm 
 
 outdir:
 ifeq ($(OS), Windows_NT)

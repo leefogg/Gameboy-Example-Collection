@@ -1,8 +1,8 @@
-BREAKPOINT: MACRO
+MACRO BREAKPOINT
     LD B, B
 ENDM
 
-NOPS: MACRO
+MACRO NOPS
     REPT \1
         NOP
     ENDR
@@ -11,7 +11,7 @@ ENDM
 ; DE - Origin
 ; HL - Destination
 ; C - Length / 16 (0-127 = 0-2032) & Mode
-STARTDMA: MACRO
+MACRO STARTDMA
 	LD A, D
 	LDH [LOW(rHDMA1)], A
 	LD A, E
@@ -24,13 +24,13 @@ STARTDMA: MACRO
 	LDH [LOW(rHDMA5)], A
 ENDM
 
-SwitchSpeedMode: MACRO
+MACRO SwitchSpeedMode
 	LD A, 1
 	LDH [$FF00+LOW(rKEY1)], A
 	STOP
 ENDM
 
-WaitVBlank: MACRO
+MACRO WaitVBlank
 	LD C, LOW(rSTAT)
 	LD D, 1
 .Loop:
@@ -40,7 +40,7 @@ WaitVBlank: MACRO
 	JR NZ, .Loop
 ENDM
 
-DelayMStates: MACRO
+MACRO DelayMStates
 	LD BC, \1 / 8  ; 3
 .Loop:
     DEC BC      ; 2
